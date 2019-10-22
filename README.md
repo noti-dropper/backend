@@ -5,13 +5,13 @@
 
  - `POST` **/api/analyze-sentence**
    - **object** *(body)*: 
-   ```json
+   ```javascript
    {
        "sentence": "입력할 문장"
    }
    ```
    - **response**
-   ```json
+   ```javascript
    {
        "result": ["결과값 리스트(배열)"]
    }
