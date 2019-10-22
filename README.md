@@ -1,42 +1,34 @@
 # Find-Noun-Python
 자연어처리 기능을 수행합니다
 
+## API
 
-# 기반작업
-  0. python3.6 버전을 준비합니다.
+ - `POST` **/api/analyze-sentence**
+   - **object** *(body)*: 
+   ```json
+   {
+       "sentence": "입력할 문장"
+   }
+   ```
+   - **response**
+   ```json
+   {
+       "result": ["결과값 리스트(배열)"]
+   }
+   ```
 
-  1. pip를 업그레이드합니다.
-  ```bash
-  $ python -m pip install --upgrade pip
-  ```
-  
-  2. JPype1 라이브러리를 받아옵니다.
-  ```bash
-  $ python -m pip install JPype1
-  ```
-  
-  3. numpy 라이브러리를 받아옵니다.
-  ```bash
-  $ python -m pip install numpy
-  ```
-  
-  4. Kkma 라이브러리를 받아옵니다.
-  ```bash
-  $ python -m pip install Kkma
-  ```
-  
-  5. flask 라이브러리를 받아옵니다.
-   ```bash
-  $ python -m pip install flask
-  ```
-  
-  6. flask_restful 라이브러리를 받아옵니다.
-   ```bash
-  $ python -m pip install flask_restful
-  ```
-  
-# 서버를 구동시키기
 
-  ```bash
-  $ python hello.py
-  ```
+## Dependancy
+ - Python `(>=3)`
+ - JDK `(>=8)`
+ - pip install
+   - flask
+   - flask_restful
+   - konlpy
+  
+## 서버 구동
+
+```bash
+$ python -m pip install {의존성 관련 라이브러리 설치}
+$ python server.py
+```
