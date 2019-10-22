@@ -37,7 +37,7 @@ def post_action():
     return 'none POST!'
 
 #유사도 분석을 수행합니다. 
-@app.route('/api/analyze-sentence', methods =['POST'])
+@app.route('/api/similarity-analysis', methods =['POST'])
 def similarity_analysis():
     if request.method == 'POST':
         #워드 임베딩 모델 파일을 가져옵니다. 절대경로로 지정되어 있으니 적절히 수정하세요.
