@@ -3,7 +3,7 @@
 
 
 # 기반작업
-  0. python3 버전을 준비합니다.
+  0. python3.6 버전을 준비합니다.
 
   1. pip를 업그레이드합니다.
   ```bash
@@ -25,4 +25,18 @@
   $ python -m pip install Kkma
   ```
   
-2. findNoun 파일을 실행합니다.
+  5. flask 라이브러리를 받아옵니다.
+   ```bash
+  $ python -m pip install flask
+  ```
+  
+  6. flask_restful 라이브러리를 받아옵니다.
+   ```bash
+  $ python -m pip install flask_restful
+  ```
+  
+# 서버를 구동시키기
+
+  ```bash
+  $ python hello.py
+  ```
