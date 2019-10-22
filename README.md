@@ -17,7 +17,7 @@
    }
    ```
    
-    - `POST` **/api/similarity-analysis**
+ - `POST` **/api/similarity-analysis**
    - **object** *(body)*: 
    ```javascript
    {
