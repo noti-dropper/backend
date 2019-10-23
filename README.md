@@ -21,7 +21,7 @@
    - **object** *(body)*: 
    ```javascript
    {
-    "request_noun": ["친구", "피자"],
+    "request_noun": ["오늘", "치킨"],
     "total_nouns" : ["신발", "피자", "행사"]
    }
    ```
