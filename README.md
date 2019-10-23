@@ -20,10 +20,10 @@
  - `POST` **/api/similarity-analysis**
    - **object** *(body)*: 
    ```javascript
-   {
-       "request_noun": "["오늘", "치킨"]",
-       "total_nouns" : "["신발", "피자", "행사"]
-   }
+{
+    "request_noun": ["친구", "피자"],
+    "total_nouns" : ["신발", "피자", "행사"]
+}
    ```
    request_noun : 의뢰하고자 하는 명사를 리스트로 넣으세요.  
    total_nouns : 당신이 value를 가지고 있는 명사를 리스트로 넣으세요.
@@ -47,6 +47,7 @@
    - flask
    - flask_restful
    - konlpy
+   - gensim
   
 ## 서버 구동
 
