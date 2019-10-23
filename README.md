@@ -54,6 +54,7 @@
    value 절대값이 클수록 큰 글자로 표현하고자합니다.
    
    - **response**
+     
 <img src="./nouns_cloud.png" width="90%"></img>
 
 ## Dependancy
