@@ -81,6 +81,8 @@ def get_wordcloud():
 
         # text = open("nouns.txt").read()
         # wordcloud = wordcloud.generate_from_text(text)
+        for noun in nouns_dict:
+            nouns_dict[noun] = abs(int(nouns_dict[noun]*100))
         wordcloud = wordcloud.generate_from_frequencies(nouns_dict)
 
         fig = plt.figure(figsize=(12,12))
