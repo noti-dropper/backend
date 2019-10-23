@@ -38,7 +38,23 @@
    }
    ```
    명사 간의 유사도를 json 형식으로 반환합니다.
-
+     
+     
+ - `POST` **/api/get-wordcloud**
+   - **object** *(body)*: 
+   ```javascript
+   {
+       "치킨": 0.7,
+       "피자": 0.67,
+       "목걸이": -0.4,
+       "일본": -0.2
+   }
+   ```
+   total 명사와 그 명사의 value 값을 json 형식으로 보내주시면 됩니다.
+   value 절대값이 클수록 큰 글자로 표현하고자합니다.
+   
+   - **response**
+<img src="./nouns_cloud.png" width="90%"></img>
 
 ## Dependancy
  - Python `(>=3)`
@@ -48,6 +64,8 @@
    - flask_restful
    - konlpy
    - gensim
+   - matplotlib
+   - wordcloud
   
 ## 서버 구동
 
