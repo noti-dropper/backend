@@ -53,13 +53,12 @@ def similarity_analysis():
 
         #return할 json 형식 데이터를 만듭니다.
         first_dict = {}
-        second_dict = {}
-        for request_noun in request_nouns:
+        for request_noun in request_nouns: 
+            second_dict = {}
             for total_noun in total_nouns:
                 simil = ko_model.wv.similarity(request_noun,total_noun)
-                second_dict[total_noun] = simil.item()
+                second_dict[total_noun] = str(simil)
             first_dict[request_noun] = second_dict
-        
         return json.dumps(first_dict)
 
 @app.route('/api/get-wordcloud', methods =['POST'])
@@ -73,15 +72,16 @@ def get_wordcloud():
         )
 
         nouns_dict = request.get_json()
-        f = open("nouns.txt", 'w')
-        for noun in nouns_dict.keys():
-            for i in range(1, nouns_dict[noun]):
-                f.write(noun + "\n")
-        f.close()
+        # f = open("nouns.txt", 'w')
+        # for noun in nouns_dict.keys():
+        #     for i in range(1, abs(nouns_dict[noun])):
+        #         f.write(noun + "\n")
+        # f.close()
 
 
-        text = open("nouns.txt").read()
-        wordcloud = wordcloud.generate_from_text(text)
+        # text = open("nouns.txt").read()
+        # wordcloud = wordcloud.generate_from_text(text)
+        wordcloud = wordcloud.generate_from_frequencies(nouns_dict)
 
         fig = plt.figure(figsize=(12,12))
         plt.imshow(wordcloud)
@@ -96,4 +96,9 @@ def get_wordcloud():
 
 if __name__ == '__main__':
     app.debug = True
+
+    #배포용
     app.run(host='0.0.0.0', port='80') 
+
+    #로컬호스트 테스트용
+    # app.run()
