@@ -1,8 +1,8 @@
+from __future__ import print_function
 from flask import Flask, request, session, redirect, url_for, abort, render_template, flash
 from flask_restful import reqparse, abort, Api, Resource
 from konlpy.tag import Kkma
 from konlpy.utils import pprint
-from __future__ import print_function
 from gensim.models import KeyedVectors
 import json
 
@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return '{"result": "null"}'
 
 #이쪽 url로 post를 보내면 이 함수가 반응합니다
 @app.route('/api/analyze-sentence', methods =['POST'])
@@ -41,7 +41,7 @@ def post_action():
 def similarity_analysis():
     if request.method == 'POST':
         #워드 임베딩 모델 파일을 가져옵니다. 절대경로로 지정되어 있으니 적절히 수정하세요.
-        ko_model = KeyedVectors.load_word2vec_format(r'C:\Users\Admin\Desktop\ko\ko.vec')
+        ko_model = KeyedVectors.load_word2vec_format('./ko.vec')
         json_data = request.get_json()
         
         #의뢰받은 명사들을 추출합니다.
@@ -52,7 +52,7 @@ def similarity_analysis():
         #return할 json 형식 데이터를 만듭니다.
         first_dict = {}
         second_dict = {}
-        for request_noun in request_noun:
+        for request_noun in request_nouns:
             for total_noun in total_nouns:
                 simil = ko_model.wv.similarity(request_noun,total_noun)
                 second_dict[total_noun] = simil
