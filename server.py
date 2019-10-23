@@ -1,9 +1,11 @@
 from __future__ import print_function
-from flask import Flask, request, session, redirect, url_for, abort, render_template, flash
+from flask import Flask, request, session, redirect, url_for, abort, render_template, flash,send_file
 from flask_restful import reqparse, abort, Api, Resource
 from konlpy.tag import Kkma
 from konlpy.utils import pprint
 from gensim.models import KeyedVectors
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
 import json
 
 app = Flask(__name__)
@@ -42,12 +44,12 @@ def similarity_analysis():
     if request.method == 'POST':
         #워드 임베딩 모델 파일을 가져옵니다. 절대경로로 지정되어 있으니 적절히 수정하세요.
         ko_model = KeyedVectors.load_word2vec_format('./ko.vec')
-        json_data = request.get_json()
+        dict_data = request.get_json()
         
         #의뢰받은 명사들을 추출합니다.
-        request_nouns = json_data['request_noun']
+        request_nouns = dict_data['request_noun']
         #어플이 디비에서 가지고 있는 모든 명사를 추출합니다.
-        total_nouns = json_data['total_nouns']
+        total_nouns = dict_data['total_nouns']
 
         #return할 json 형식 데이터를 만듭니다.
         first_dict = {}
@@ -55,10 +57,41 @@ def similarity_analysis():
         for request_noun in request_nouns:
             for total_noun in total_nouns:
                 simil = ko_model.wv.similarity(request_noun,total_noun)
-                second_dict[total_noun] = simil
+                second_dict[total_noun] = simil.item()
             first_dict[request_noun] = second_dict
         
         return json.dumps(first_dict)
+
+@app.route('/api/get-wordcloud', methods =['POST'])
+def get_wordcloud():
+    if request.method == 'POST':
+        font_path = './kofont.ttf'
+        wordcloud = WordCloud(
+        font_path = font_path,
+        width = 200,
+        height = 200
+        )
+
+        nouns_dict = request.get_json()
+        f = open("nouns.txt", 'w')
+        for noun in nouns_dict.keys():
+            for i in range(1, nouns_dict[noun]):
+                f.write(noun + "\n")
+        f.close()
+
+
+        text = open("nouns.txt").read()
+        wordcloud = wordcloud.generate_from_text(text)
+
+        fig = plt.figure(figsize=(12,12))
+        plt.imshow(wordcloud)
+        plt.axis("off")
+        fig.savefig('nouns_cloud.png')
+
+        filename = 'nouns_cloud.png'
+        
+        return send_file(filename, mimetype='image/png')
+
 
 
 if __name__ == '__main__':
