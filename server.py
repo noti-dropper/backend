@@ -64,7 +64,7 @@ def similarity_analysis():
 @app.route('/api/get-wordcloud', methods =['POST'])
 def get_wordcloud():
     if request.method == 'POST':
-        font_path = './kofont.ttf'
+        font_path = './kohana.ttf'
         wordcloud = WordCloud(
         font_path = font_path,
         width = 200,
