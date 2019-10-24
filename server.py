@@ -67,8 +67,8 @@ def get_wordcloud():
         font_path = './kohana.ttf'
         wordcloud = WordCloud(
         font_path = font_path,
-        width = 200,
-        height = 200,
+        width = 500,
+        height = 500,
         background_color='white'
         )
 
