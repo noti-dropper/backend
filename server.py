@@ -68,7 +68,8 @@ def get_wordcloud():
         wordcloud = WordCloud(
         font_path = font_path,
         width = 200,
-        height = 200
+        height = 200,
+        background_color='white'
         )
 
         nouns_dict = request.get_json()
